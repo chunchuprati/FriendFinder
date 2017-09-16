@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
     <style>
         body{
             font-family: "Times New Roman", Times, serif; 
@@ -16,6 +15,13 @@
         .btn {
             padding: 20px;
             font-size: 1.2em;
+        }
+        a{
+            color:white;
+        }
+        a:hover{
+            color:white;
+            text-decoration: none;
         }
         
     
@@ -30,16 +36,24 @@
                     <h1><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                     FriendFinder</h1>
                     </div>
+                    <hr>
                 <h3> Answer a few basic questions.</h3>
-                <h3> Then find the friend with the greatest compatibility!</h3>  
+                <h3> Then find the friend with the greatest compatibility!</h3> 
+                 
                 <button type="button" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-list"  aria-hidden="true"></span> Go to Survey</button>      
+                    <span class="glyphicon glyphicon-list"  aria-hidden="true"></span>
+                    <a href="survey"> Go to Survey</a></button>      
             </div>
 
             <div class="footer">
-                <a href="#"> API Friends List |</a> 
+                <a href="/api/friends.js"> API Friends List |</a> 
                 <a href="https://github.com/chunchuprati">GitHub Repo</a>
         </div>
-            
+         
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>	
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+        
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
