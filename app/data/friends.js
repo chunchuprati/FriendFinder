@@ -1,5 +1,5 @@
 
-var friends = [
+var friendData = [
 {
    
     "name":"Bita",
@@ -19,5 +19,4 @@ var friends = [
   }
 
 ]
-
-module.exports = friends;
+module.exports = friendData;

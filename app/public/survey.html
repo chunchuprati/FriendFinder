@@ -62,6 +62,7 @@
 						<option value=""></option>
 						<option value="1">1 (Strongly Disagree)</option>
 						<option value="2">2</option>
+						<option value="4" selected>4</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
 						<option value="5">5 (Strongly Agree)</option>
@@ -75,6 +76,7 @@
 						<option value="2">2</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
+						<option value="4" selected>4</option>
 						<option value="5">5 (Strongly Agree)</option>
 				</select>
 
@@ -85,7 +87,7 @@
 						<option value="1">1 (Strongly Disagree)</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
-						<option value="4">4</option>
+						<option value="4" selected>4</option>
 						<option value="5">5 (Strongly Agree)</option>
 				</select>
 
@@ -95,7 +97,7 @@
 						<option value=""></option>
 						<option value="1">1 (Strongly Disagree)</option>
 						<option value="2">2</option>
-						<option value="3">3</option>
+						<option value="3" selected>3</option>
 						<option value="4">4</option>
 						<option value="5">5 (Strongly Agree)</option>
 				</select>
@@ -105,7 +107,7 @@
 				<select data-placeholder="" class="chosen-select" id="q5">
 						<option value=""></option>
 						<option value="1">1 (Strongly Disagree)</option>
-						<option value="2">2</option>
+						<option value="2" selected>2</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
 						<option value="5">5 (Strongly Agree)</option>
@@ -116,7 +118,7 @@
 				<select data-placeholder="" class="chosen-select" id="q6">
 						<option value=""></option>
 						<option value="1">1 (Strongly Disagree)</option>
-						<option value="2">2</option>
+						<option value="2" selected>2</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
 						<option value="5">5 (Strongly Agree)</option>
@@ -129,7 +131,7 @@
 						<option value="1">1 (Strongly Disagree)</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
-						<option value="4">4</option>
+						<option value="4" selected>4</option>
 						<option value="5">5 (Strongly Agree)</option>
 				</select>
 
@@ -140,7 +142,7 @@
 						<option value="1">1 (Strongly Disagree)</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
-						<option value="4">4</option>
+						<option value="4" selected>4</option>
 						<option value="5">5 (Strongly Agree)</option>
 				</select>
 
@@ -150,7 +152,7 @@
 						<option value=""></option>
 						<option value="1">1 (Strongly Disagree)</option>
 						<option value="2">2</option>
-						<option value="3">3</option>
+						<option value="3" selected>3</option>
 						<option value="4">4</option>
 						<option value="5">5 (Strongly Agree)</option>
 				</select>
@@ -163,7 +165,7 @@
 						<option value="1">1 (Strongly Disagree)</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
-						<option value="4">4</option>
+						<option value="4" selected>4</option>
 						<option value="5">5 (Strongly Agree)</option>
 				</select>
 				
@@ -192,7 +194,7 @@
 			</div>
 			<div class="modal-body">
 			  <h2 id="matchName"></h2>
-			  <img id="matchImg" src="https://cdn.pixabay.com/photo/2015/06/12/21/58/child-807547_1280.jpg" alt="">
+			  <img id="matchImg" src= "" alt="NoImage">
 			</div>
 			<div class="modal-footer">
 			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -221,34 +223,46 @@
 
 		  $('.chosen-select').each(function() {
 
-		  	if( $(this).val() === "")
-		  		isValid = false
-		  })
+		  	if( $(this).val() === ""){
+				  isValid = false
+			  }
+		  });
 		  return isValid;
 		}
 
-		// If all required fields are filled
+		//If everything is filled
 		if (validateForm() == true)
 		{
-			// Create an object for the user's data
-	    	var userData = {
+			// Create a new friend from the values submitted
+	    	var newFriend = {
 	    		name: $("#name").val(),
 	    		photo: $("#photo").val(),
-				scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(),
-				 $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(),
-				  $("#q9").val(), $("#q10").val(), ]
-	    	}
-
+				scores: [
+					$("#q1").val(),
+					$("#q2").val(), 
+					$("#q3").val(), 
+					$("#q4").val(),
+					$("#q5").val(), 
+					$("#q6").val(), 
+					$("#q7").val(), 
+					$("#q8").val(),
+					$("#q9").val(), 
+					$("#q10").val(), 
+				]
+	    	};
+			console.log(newFriend.name);
 
 	    	// Grab the URL of the website
 	    	var currentURL = window.location.origin;
 
 	    	// AJAX post the data to the friends API. 
-	    	$.post(currentURL + "/api/friends", userData, function(data){
+	    	$.post(currentURL + "/api/friends", newFriend, function(data){
 
 	    		// Grab the result from the AJAX post so that the best match's name and photo are displayed.
 	    		$("#matchName").text(data.name);
-	    		$('#matchImg').attr("src", data.photo);
+				$('#matchImg').attr("src", data.photo);
+				
+				console.log(data.photo);
 
 		    	// Show the modal with the best match 
 		    	$("#resultsModal").modal('toggle');

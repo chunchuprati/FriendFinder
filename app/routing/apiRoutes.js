@@ -11,42 +11,31 @@ module.exports = function(app){
 
 
 	app.post('/api/friends', function(req, res){
+		
+		var newFriendScores = req.body.scores;
+		var scoresArray = [];
+		var friendCount = 0;
+		var bestMatch = 0;
 
-		var greatMatch = {
-			name: "",
-			image: "",
-			matchDifference: 1000
-		};
-		var usrData 	= req.body;
-		var usrName 	= usrData.name;
-		var usrImage 	= usrData.image;
-		var usrScores 	= usrData.scores;
-
-		var totalDifference = 0;
-
-		//loop through the friends data array of objects to get each friends scores
-		for(var i = 0; i < friendData.length-1; i++){
-			console.log(friendData[i].name);
-			totalDifference = 0;
-
-			//loop through that friends score and the users score and calculate the 
-			// absolute difference between the two and push that to the total difference variable set above
-			for(var j = 0; j < 10; j++){
-				// We calculate the difference between the scores and sum them into the totalDifference
-				totalDifference += Math.abs(parseInt(usrScores[j]) - parseInt(friendData[i].scores[j]));
-				// If the sum of differences is less then the differences of the current "best match"
-				if (totalDifference <= greatMatch.friendDifference){
-
-					// Reset the bestMatch to be the new friend. 
-					greatMatch.name = friendData[i].name;
-					greatMatch.photo = friendData[i].photo;
-					greatMatch.matchDifference = totalDifference;
-				}
+		for (var i = 0; i < friendData.length; i++){
+			var scoresDiff = 0;
+			for ( var j = 0; j < newFriendScores.length; j++){
+				scoresDiff = (Math.abs(parseInt(friendData[i].scores[j]) - parseInt(newFriendScores[j])));
 			}
+			scoresArray.push(scoresDiff);
 		}
 
-		friendData.push(usrData);
- 
-		res.json(greatMatch);
+
+		for ( var i = 0; i < scoresArray.length; i++){
+
+			if(scoresArray[i] <= scoresArray[bestMatch]){
+				bestMatch = i;
+			}
+		}
+		var bestFriendFinder = friendData[bestMatch];
+		res.json(bestFriendFinder);
+
+		friendData.push(req.body);
+		// res.json(friendData[0]);
 	});
 };
